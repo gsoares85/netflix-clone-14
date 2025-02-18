@@ -1,6 +1,7 @@
 import {getServerSession} from "next-auth";
 import {redirect} from "next/navigation";
 import {Navbar} from "@/components/navbar";
+import {Billboard} from "@/components/billboard";
 
 export default async function Home() {
     const session = await getServerSession();
@@ -12,6 +13,7 @@ export default async function Home() {
     return (
         <>
             <Navbar user={session.user} />
+            <Billboard />
         </>
     );
 }
