@@ -1,6 +1,7 @@
 import {Movie} from "@prisma/client";
 import Image from "next/image";
 import {BsFillPlayFill} from "react-icons/bs";
+import {FavoriteButton} from "@/components/favorite-button";
 
 interface MovieCardProps {
     movie: Movie;
@@ -30,6 +31,7 @@ export const MovieCard = ({movie}: MovieCardProps) => {
                         rounded-full flex justify-center items-center transition hover:bg-neutral-300">
                             <BsFillPlayFill size={30}/>
                         </div>
+                        <FavoriteButton movieId={movie.id} />
                     </div>
                     <p className="text-green-400 font-semibold mt-4">
                         New <span className="text-white">2023</span>

@@ -16,7 +16,7 @@ export default async function Home() {
             <Navbar user={session.user} />
             <Billboard />
             <div className="pb-40">
-                <MovieList title="Trending Now" />
+                <MovieList />
             </div>
         </>
     );

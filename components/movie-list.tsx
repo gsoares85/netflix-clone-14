@@ -2,31 +2,21 @@
 
 import {isEmpty} from "lodash";
 import {useMovieList} from "@/hooks/useMovieList";
-import {MovieCard} from "@/components/movie-card";
+import {useFavorites} from "@/hooks/useFavorites";
+import {MovieListGrid} from "@/components/movie-list-grid";
 
-interface MovieListProps {
-    title: string;
-}
-
-export const MovieList = ({title}: MovieListProps) => {
-    const { data: movies = []} = useMovieList();
+export const MovieList = () => {
+    const {data: movies = []} = useMovieList();
+    const {data: favorites = []} = useFavorites();
 
     if (isEmpty(movies)) {
         return null;
     }
 
     return (
-        <div className="px-4 md:px-12 my-4 space-y-8">
-            <div>
-                <p className="text-white text-md md:text-xl lg:text-2xl font-semibold">
-                    {title}
-                </p>
-                <div className="grid grid-cols-4 gap-2">
-                    {movies.map((movie) => (
-                        <MovieCard key={movie.id} movie={movie} />
-                    ))}
-                </div>
-            </div>
-        </div>
+        <>
+            <MovieListGrid title="Trending Now" movies={movies} />
+            <MovieListGrid title="My List" movies={favorites} />
+        </>
     )
 }

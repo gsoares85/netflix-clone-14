@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
 import {getServerSession} from "next-auth";
+import prismadb from "@/lib/prismadb";
 
 export const GET = async () => {
     try {
@@ -7,7 +8,14 @@ export const GET = async () => {
         if (!session || !session.user) {
             return NextResponse.json({ error: 'Not authenticated'}, {status: 401});
         }
-        return NextResponse.json(session.user)
+
+        const currentUser = await prismadb.user.findUnique({
+            where: {
+                email: session.user.email
+            }
+        })
+
+        return NextResponse.json(currentUser)
     } catch (error) {
         console.error(error);
         return NextResponse.json({error: 'Error getting current user'}, {status: 400})
