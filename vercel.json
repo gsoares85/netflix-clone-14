@@ -1,5 +1,3 @@
 {
-  "scripts": {
-    "build": "next build && prisma generate"
-  }
+  "buildCommand": "next build && prisma generate"
 }
